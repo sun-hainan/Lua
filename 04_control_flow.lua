@@ -324,47 +324,63 @@ end
 repeat_vs_while()
 
 -- ============================================================
--- 【对比】Rust vs Lua vs Python
+-- 【对比】Lua vs Python vs Rust vs Go vs C++
 -- ============================================================
--- Rust:
---   - if/else 是表达式，可以返回值
---   - match 是模式匹配
---   - loop/while/for 三种循环，break 可返回值
---   - 标签 'label 支持多层循环控制
---   - panic/Result/Option 分离了不可恢复错误和可恢复错误
-
 -- Lua:
 --   - if/elseif/else 是语句（不能作为表达式返回值）
 --   - 没有 match，用 if-elseif 或表跳转代替
---   - while/repeat/for 三种循环，repeat 是后条件循环
+--   - while/repeat/for 三种循环，repeat 是后条件循环（至少执行一次）
 --   - 没有 break 标签，只有 break（只能退出一层）
---   - 没有 continue，用 if 或 goto 模拟
+--   - 没有 continue，用 if 或 goto（Lua 5.2+）模拟
 
 -- Python:
 --   - if/elif/else 是语句
 --   - match-case（3.10+）是模式匹配
 --   - while/for 循环，有 break/continue
---   - try/except/finally 异常处理
+--   - try/except/finally/else 异常处理
+--   - for 可迭代任意可迭代对象
+
+-- Rust:
+--   - if/else 是表达式，可以返回值
+--   - match 是强大的模式匹配
+--   - loop/while/for 三种循环，break 可返回值
+--   - 标签 'label 支持多层循环控制
+--   - panic/Result/Option 分离不可恢复错误和可恢复错误
+
+-- Go:
+--   - if/switch 是语句，支持初始化语句
+--   - switch 无需 break（自动中断），fallthrough 可穿透
+--   - for 是唯一循环关键字（while 用 for 代替）
+--   - 没有 continue，用 if 跳过
+--   - defer 延迟执行，常用于资源清理
+
+-- C++:
+--   - if/switch 是语句，switch 无需 break（可穿透）
+--   - if 可以使用 constexpr if（C++17）
+--   - while/do-while/for 三种循环
+--   - break/continue 控制循环
+--   - try/catch/throw 异常处理，noexcept 指定不抛异常
 
 function compare_control_flow()
-    print("=== 三语言流程控制对比 ===")
+    print("=== 五语言流程控制对比 ===")
 
-    -- Lua 没有 match/switch
-    -- Python 3.10+ 有 match-case
-    -- Rust 有强大的 match
+    -- Lua: 没有 match/switch，用 if-elseif 或表跳转；repeat 是后条件循环（至少执行一次）
+    -- Python 3.10+: match-case 模式匹配
+    -- Rust: 强大的 match 表达式
+    -- Go: switch 自动穿透（fallthrough 可控制），无 continue
+    -- C++: switch 无需 break，可穿透
 
-    -- Lua 的 repeat 最小执行一次
-    -- Python/Rust 的 while 先检查条件
-
-    -- Lua 没有 continue（goto 是 Lua 5.2+）
+    -- Lua 没有 continue（goto 是 Lua 5.2+ 才支持）
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 实现一个函数，用表模拟 switch 计算天数
--- 2. 比较 repeat...until 和 while 的使用场景
--- 3. 用 goto 实现 continue 的功能
+-- 1. 实现一个月份天数计算函数：用表模拟 switch，输入月份（1-12），返回天数
+-- 2. 比较 repeat...until 和 while 的使用场景，各举一个实际例子
+-- 3. 用 goto 实现 continue 的功能（跳过循环中某些迭代）
+-- 4. 用泛型 for 迭代器实现一个 my_ipairs 函数，并验证它和原生 ipairs 行为一致
+-- 5. 用 pcall 包装一个除法函数，使其在除以 0 时不崩溃，而是返回错误信息
 
 -- ============================================================
 -- 总结

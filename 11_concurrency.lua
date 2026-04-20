@@ -335,22 +335,26 @@ coroutine_limitations()
 --   - asyncio（协程 + 事件循环）
 
 function compare_concurrency()
-    print("=== 三语言并发对比 ===")
+    print("=== 五语言并发对比 ===")
 
-    -- Rust: 真正的多线程，类型系统保证安全
-    -- Lua: 协程是协作式，单线程
-    -- Python: 有真正的线程（受 GIL 限制）
+    -- Lua: 协程是协作式，单线程，LuaJIT+FFI 可实现真多线程
+    -- Python: threading(受GIL限制)/multiprocessing/asyncio
+    -- Rust: std::thread + Arc/Mutex，tokio 异步运行时
+    -- Go: goroutine 是核心（轻量级协程，M:N 调度）
+    -- C++: std::thread + std::async，C++20 coroutine
 
     print("Lua: coroutine is single-threaded cooperative multitasking")
-    print("Python: asyncio + await for async, threading for real threads")
+    print("Go: goroutine is lightweight M:N threading")
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 用协程实现一个斐波那契数列生成器
--- 2. 用协程实现一个状态机（处理 HTTP 请求）
--- 3. 比较协程和线程的优缺点
+-- 1. 用协程实现一个斐波那契数列生成器：function fib_gen()，每次 resume 返回一个斐波那契数
+-- 2. 用协程实现一个 HTTP 请求状态机，包含 IDLE -> CONNECTING -> REQUESTING -> RESPONDING -> COMPLETE 状态
+-- 3. 比较协程和线程的优缺点，并说明在哪些场景下应该用协程而不是线程
+-- 4. 用生产者-消费者模式实现一个并发任务队列，多个 worker 协程并发处理
+-- 5. 用协程实现一个异步 sleep 函数：async_sleep(seconds)，调用后协程挂起指定秒数后恢复
 
 -- ============================================================
 -- 总结

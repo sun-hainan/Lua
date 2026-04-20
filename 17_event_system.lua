@@ -526,7 +526,7 @@ end
 event_bus()
 
 -- ============================================================
--- 【对比】Rust vs Lua vs Python 事件系统
+-- 【对比】Lua vs Python vs Rust vs Go vs C++ 事件系统
 -- ============================================================
 -- Rust:
 --   - 观察者：trait + Box<dyn Observer>
@@ -541,22 +541,24 @@ event_bus()
 --   - blinker：信号/事件
 
 function compare_event_systems()
-    print("=== 三语言事件系统对比 ===")
+    print("=== 五语言事件系统对比 ===")
     print()
-    print("| 特性          | Rust       | Python        | Lua           |")
-    print("|---------------|------------|---------------|---------------|")
-    print("| 发布-订阅     | 自定义     | blinker       | table 模拟   |")
-    print("| 信号/槽       | 无原生     | 无原生        | 无原生       |")
-    print("| 异步流        | futures    | asyncio       | 协程         |")
-    print("| Actor 模型    | actix      | thespian      | 自定义       |")
+    print("| 特性          | Rust       | Python        | Lua           | Go             | C++             |")
+    print("|---------------|------------|---------------|---------------|----------------|-----------------|")
+    print("| 发布-订阅     | 自定义     | blinker       | table 模拟   | 自定义         | 观察者模式手写 |")
+    print("| 信号/槽       | 无原生     | 无原生        | 无原生       | 无原生         | Qt 信号槽      |")
+    print("| 异步流        | futures    | asyncio       | 协程         | channels       | boost::asio     |")
+    print("| Actor 模型    | actix      | thespian      | 自定义       | -              | -               |")
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 实现一个带 once 功能的事件发射器
--- 2. 实现一个线程安全的 EventBus（用协程）
--- 3. 用 channel 实现一个生产者-消费者消息队列
+-- 1. 实现一个带 once 功能的事件发射器：once(event, handler) 只触发一次后自动移除
+-- 2. 实现一个线程安全的 EventBus，支持 subscribe/unsubscribe/publish，内部用协程队列
+-- 3. 用协程实现一个 channel（通道）：create_channel(buffer_size)，支持 send 和 receive 操作
+-- 4. 实现一个带中间件的 HTTP 请求处理管道，包含日志、认证、限流三个中间件
+-- 5. 用 Actor 模型实现一个简单的银行转账系统，支持 deposit/withdraw/transfer 操作
 
 -- ============================================================
 -- 总结

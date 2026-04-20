@@ -460,7 +460,7 @@ end
 profiling_tools()
 
 -- ============================================================
--- 【对比】Rust vs Lua vs Python 工程化
+-- 【对比】Lua vs Python vs Rust vs Go vs C++ 工程化
 -- ============================================================
 -- Rust:
 --   - Cargo：内置构建/包管理
@@ -478,22 +478,24 @@ profiling_tools()
 --   - pytest：测试
 
 function compare_engineering()
-    print("=== 三语言工程化对比 ===")
+    print("=== 五语言工程化对比 ===")
     print()
-    print("| 方面        | Rust     | Python      | Lua      |")
-    print("|-------------|----------|-------------|----------|")
-    print("| 包管理      | Cargo    | pip/poetry   | LuaRocks |")
-    print("| 格式化      | rustfmt  | black        | 无       |")
-    print("| Lint        | clippy   | ruff/pylint  | luacheck|")
-    print("| 测试框架    | #[test]  | pytest       | busted   |")
+    print("| 方面        | Rust     | Python      | Lua      | Go       | C++        |")
+    print("|-------------|----------|-------------|----------|----------|------------|")
+    print("| 包管理      | Cargo    | pip/poetry   | LuaRocks | go mod   | vcpkg/cmake|")
+    print("| 格式化      | rustfmt  | black        | 无       | gofmt    | clang-format|")
+    print("| Lint        | clippy   | ruff/pylint  | luacheck| golangci | clang-tidy |")
+    print("| 测试框架    | #[test]  | pytest       | busted   | testing  | gtest/doctest|")
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 用闭包实现一个计数器模块（带私有状态）
--- 2. 实现一个装饰器函数（给函数添加日志）
--- 3. 配置 GitHub Actions CI 流程
+-- 1. 用闭包实现一个计数器模块（带私有状态），提供 increment/decrement/reset/get 操作
+-- 2. 实现一个装饰器函数 logger(fn)，在函数调用前后打印日志，并返回装饰后的函数
+-- 3. 配置 GitHub Actions CI 流程：安装 Lua 环境，运行 busted 测试，使用 luacheck 检查代码
+-- 4. 实现一个简单的模块系统：module(name, exports)，导出命名空间
+-- 5. 用 os.clock() 测量字符串拼接（..）和 table.concat 在 10000 次拼接下的性能差异
 
 -- ============================================================
 -- 总结

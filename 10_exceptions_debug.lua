@@ -333,19 +333,23 @@ memory_leak_demo()
 --   - Exception 类支持继承
 
 function compare_exceptions()
-    print("=== 三语言异常处理对比 ===")
+    print("=== 五语言异常处理对比 ===")
 
-    -- Lua 需要检查返回值
-    -- Python try/except 捕获
-    -- Rust Result 必须处理
+    -- Lua: error()/pcall/xpcall，无类型化错误
+    -- Python: try/except/raise
+    -- Rust: panic!/Result/Option，? 运算符早期返回
+    -- Go: panic/recover 配合 defer，无类型化异常
+    -- C++: throw/try/catch，noexcept 指定不抛异常
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 实现一个 try-catch 模拟（用 pcall）
--- 2. 实现一个带日志级别的日志系统
--- 3. 编写测试用例验证冒泡排序
+-- 1. 实现一个 try-catch 模拟函数：try_catch(try_fn, catch_fn)，用 pcall 实现
+-- 2. 实现一个带日志级别的日志系统（DEBUG/INFO/WARN/ERROR），支持输出到文件
+-- 3. 编写完整的测试用例验证冒泡排序的正确性（各种边界情况）
+-- 4. 用 os.clock() 实现一个性能测量工具 measure(func, iterations)，返回执行时间
+-- 5. 用 debug.getinfo 打印一个函数的定义行号、源文件、参数信息
 
 -- ============================================================
 -- 总结

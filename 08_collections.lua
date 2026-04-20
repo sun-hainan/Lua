@@ -375,9 +375,14 @@ sorted_map_demo()
 --   - collections.OrderedDict: 有序字典（Python 3.7+ 保持插入顺序）
 
 function compare_collections()
-    print("=== 三语言集合对比 ===")
+    print("=== 五语言集合对比 ===")
 
-    -- Lua 的 table 是万能的
+    -- Lua: table 是唯一复合类型，可作数组/字典/集合
+    -- Python: list/dict/set 是内建类型
+    -- Rust: Vec/HashMap/HashSet/BTreeMap
+    -- Go: slice/map，set 需要自己实现
+    -- C++: std::vector/std::unordered_map/std::unordered_set
+
     local as_array = {1, 2, 3}      -- 数组
     local as_dict = {a = 1, b = 2}  -- 字典
     local as_set = {apple = true, banana = true}  -- 集合
@@ -386,11 +391,13 @@ function compare_collections()
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 实现一个 LRU 缓存（用有序表或双向链表）
--- 2. 实现一个图（用邻接表表示）
--- 3. 比较 Lua 的 table 和 Python 的 dict 的性能特点
+-- 1. 实现一个 LRU 缓存（Least Recently Used），用 table 实现 get/put 方法
+-- 2. 实现一个图（用邻接表表示），支持添加边和 BFS 遍历
+-- 3. 比较 Lua 的 table 和 Python 的 dict 的性能特点，以及各自适用的场景
+-- 4. 用弱表实现一个自动过期的缓存（写入后 N 秒自动删除）
+-- 5. 实现一个有序集合（SortedSet），元素按分数排序，支持 add/score_of/rank_of
 
 -- ============================================================
 -- 总结

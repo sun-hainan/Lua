@@ -268,34 +268,48 @@ end
 string_operations()
 
 -- ============================================================
--- 【对比】Rust vs Lua vs Python
+-- 【对比】Lua vs Python vs Rust vs Go vs C++
 -- ============================================================
--- Rust:
---   - let 声明变量，默认不可变，mut 可变
---   - 所有权：每个值唯一所有者，move 语义
---   - 借用：& 不可变，&mut 可变，无空引用
---   - Option<T> 替代 null
---   - 基本类型：i32/u32/f64/bool/char
-
 -- Lua:
 --   - local 声明变量，全局变量直接赋值
 --   - 无所有权概念，垃圾回收自动处理
 --   - 变量直接访问，无借用概念
---   - nil 表示空值（Lua 唯一"空"的表示）
+--   - nil 表示空值（唯一"空"的表示）
 --   - 基本类型：nil/boolean/number/string/function/table/userdata/thread
 --   - 类型转换自动进行（"123" + 1 = 124）
 
 -- Python:
 --   - x = value，动态类型，可重新赋值
---   - 垃圾回收（引用计数）
+--   - 垃圾回收（引用计数为主）
 --   - 无借用概念
 --   - None 表示空值
---   - 基本类型：int/float/bool/str/complex
+--   - 基本类型：int/float/bool/str/complex/list/dict
+
+-- Rust:
+--   - let 声明变量，默认不可变，mut 可变
+--   - 所有权：每个值唯一所有者，move 语义
+--   - 借用：& 不可变，&mut 可变，无空引用
+--   - Option<T> 替代 null
+--   - 基本类型：i32/u32/f64/bool/char/str
+
+-- Go:
+--   - var x int 或 x := value（短声明）
+--   - 垃圾回收自动管理
+--   - 无借用概念，指针传递是常用模式
+--   - nil 是指针/接口/slice/map/chan/func 的零值
+--   - 基本类型：int/float/bool/string/array/slice/map/struct
+
+-- C++:
+--   - int x; 或 auto x = value;（C++11）
+--   - RAII + 智能指针管理资源
+--   - 引用（&）和指针（*）都可间接访问
+--   - nullptr（C++11）是空指针，NULL 历史兼容
+--   - 基本类型：int/float/double/bool/char/指针
 
 function compare_types()
-    print("=== 三语言对比：变量与类型 ===")
+    print("=== 五语言对比：变量与类型 ===")
 
-    -- Lua 的 nil vs Rust 的 None vs Python 的 None
+    -- Lua 的 nil vs Rust 的 None vs Python 的 None vs Go 的 nil vs C++ 的 nullptr
     local lua_nil = nil
     local lua_false = false
 
@@ -310,11 +324,13 @@ function compare_types()
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 解释 Lua 的 table 为什么索引从 1 开始
--- 2. 比较 nil、false、0 在 Lua 中的布尔判断
--- 3. 实现一个字符串反转函数
+-- 1. 解释 Lua 的 table 为什么索引从 1 开始，它和数组/字典有什么关系
+-- 2. 比较 nil、false、0 在 Lua 中的布尔判断，并说明各自的行为
+-- 3. 实现一个字符串反转函数（不能使用 string.reverse）
+-- 4. 用 local 声明一个模块级变量和一个函数级变量，说明它们作用域的区别
+-- 5. 写代码演示多进制数（十进制、十六进制、二进制、八进制）的定义和转换
 
 -- ============================================================
 -- 总结

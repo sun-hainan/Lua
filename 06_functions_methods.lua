@@ -381,35 +381,53 @@ end
 tail_call_demo()
 
 -- ============================================================
--- 【对比】Rust vs Lua vs Python
+-- 【对比】Lua vs Python vs Rust vs Go vs C++
 -- ============================================================
--- Rust:
---   - 函数用 fn 定义，支持泛型、Trait 约束
---   - 不支持函数重载
---   - 闭包 |x| expr 是语法糖
---   - 方法用 impl Type {} 定义
-
 -- Lua:
 --   - 函数用 function 关键字定义
---   - 函数是一等公民，可以赋值、传递、返回
---   - 闭包是自然的（函数可以访问外部变量）
+--   - 函数是一等公民，可赋值、传递、返回
+--   - 闭包自然（函数可访问外部变量 upvalue）
 --   - 无方法语法糖，所有方法调用都是 table.func(obj, ...) 形式
+--   - 支持尾调用消除（TCO）
 
 -- Python:
 --   - 函数用 def 定义，lambda 用于匿名函数
---   - 支持函数重载（靠默认参数模拟）
+--   - 不支持真正的函数重载，靠默认参数模拟
 --   - 闭包通过 nonlocal 关键字修改外层变量
 --   - 方法第一个参数是 self
+--   - 装饰器是元编程核心
+
+-- Rust:
+--   - 函数用 fn 定义，支持泛型、Trait 约束
+--   - 不支持函数重载（靠泛型或 Trait）
+--   - 闭包 |x| expr 有三种捕获方式（按引用/可变引用/按值）
+--   - 方法用 impl Type {} 定义
+--   - 支持尾调用优化（但不如 Lua 彻底）
+
+-- Go:
+--   - 函数用 func 关键字定义
+--   - 不支持函数重载
+--   - 没有闭包语法糖，但支持匿名函数和闭包
+--   - 方法用 func (receiver) name() 语法
+--   - 不支持尾调用优化（栈会增长）
+
+-- C++:
+--   - 函数用 return_type name() 定义
+--   - 不支持函数重载（靠模板实现泛型）
+--   - std::function + lambda 提供闭包
+--   - lambda：[capture](params) -> ret { body }
+--   - 不支持尾调用优化
 
 function compare_functions()
-    print("=== 三语言函数对比 ===")
+    print("=== 五语言函数对比 ===")
 
-    -- Rust 闭包 vs Lua 闭包 vs Python lambda
     -- Rust: local f = |x| x * 2
     -- Lua:  local f = function(x) return x * 2 end
     -- Python: f = lambda x: x * 2
+    -- Go: f := func(x int) int { return x * 2 }
+    -- C++: auto f = [](int x) { return x * 2; }
 
-    -- Lua 的 upvalue vs Python 的 nonlocal
+    -- Lua 的 upvalue vs Python nonlocal vs Rust 借用
     local function make_counter(start)
         local count = start
         return function()
@@ -423,11 +441,13 @@ function compare_functions()
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 实现一个 memoize 函数（记忆化）
--- 2. 实现一个 compose 函数（组合多个函数）
--- 3. 解释 Lua 的 upvalue 和 Python 的 nonlocal 的区别
+-- 1. 实现一个 memoize 函数（记忆化），对斐波那契函数进行记忆化优化
+-- 2. 实现一个 compose 函数：compose(f, g)(x) = f(g(x))，支持多个函数组合
+-- 3. 解释 Lua 的 upvalue 和 Python 的 nonlocal 的区别，并用代码演示
+-- 4. 实现一个带默认值参数的函数：function defaults(a, b, c)，a 默认 1，b 默认 2
+-- 5. 用尾递归实现一个列表求和函数，并说明尾调用优化的条件
 
 -- ============================================================
 -- 总结

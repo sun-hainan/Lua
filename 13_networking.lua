@@ -265,7 +265,7 @@ end
 smtp_demo()
 
 -- ============================================================
--- 【对比】Rust vs Lua vs Python 网络
+-- 【对比】Lua vs Python vs Rust vs Go vs C++ 网络
 -- ============================================================
 -- Rust:
 --   - 标准库提供 TcpListener/TcpStream/UdpSocket
@@ -281,23 +281,25 @@ smtp_demo()
 --   - asyncio 提供异步网络
 
 function compare_networking()
-    print("=== 三语言网络对比 ===")
+    print("=== 五语言网络对比 ===")
 
     print()
-    print("| 特性       | Rust              | Lua               | Python           |")
-    print("|------------|-------------------|-------------------|------------------|")
-    print("| TCP        | 标准库            | luasocket         | socket.stdlib    |")
-    print("| UDP        | 标准库            | luasocket         | socket.stdlib    |")
-    print("| HTTP       | reqwest           | luasocket.http    | requests         |")
-    print("| 异步       | tokio             | OpenResty/协程    | asyncio          |")
+    print("| 特性       | Rust              | Lua               | Python           | Go               | C++              |")
+    print("|------------|-------------------|-------------------|------------------|------------------|------------------|")
+    print("| TCP        | std::net::TcpStream| luasocket         | socket.stdlib    | net.Listen       | boost::asio      |")
+    print("| UDP        | std::net::UdpSocket| luasocket         | socket.stdlib    | net.ListenPacket | boost::asio      |")
+    print("| HTTP       | reqwest           | luasocket.http    | requests         | net/http         | libcurl/cpp-netlib|")
+    print("| 异步       | tokio             | OpenResty/协程    | asyncio          | net/http         | boost::asio      |")
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 用 luasocket 实现一个 echo 服务器
--- 2. 实现一个 HTTP 客户端（带错误处理）
--- 3. 比较同步和异步 IO 的适用场景
+-- 1. 用 luasocket 实现一个 echo 服务器，监听 8080 端口，收到消息后原样返回
+-- 2. 实现一个带错误处理的 HTTP 客户端函数 http_get(url)，返回响应内容和状态码
+-- 3. 比较同步和异步 IO 的适用场景，说明在什么情况下应该用协程模拟异步
+-- 4. 用 socket.http 实现一个 URL 解析和重组的函数，验证 parse_url 和 build_url 的正确性
+-- 5. 用 socket.udp 实现一个简单的 DNS 查询工具（查询 google.com 的 IP）
 
 -- ============================================================
 -- 总结

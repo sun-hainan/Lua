@@ -340,7 +340,7 @@ end
 connection_pool_demo()
 
 -- ============================================================
--- 【对比】Rust vs Lua vs Python 数据库
+-- 【对比】Lua vs Python vs Rust vs Go vs C++ 数据库
 -- ============================================================
 -- Rust:
 --   - rusqlite：SQLite
@@ -357,22 +357,24 @@ connection_pool_demo()
 --   - psycopg2：PostgreSQL
 
 function compare_databases()
-    print("=== 三语言数据库对比 ===")
+    print("=== 五语言数据库对比 ===")
 
     print()
-    print("| 特性       | Rust        | Python           | Lua          |")
-    print("|------------|-------------|------------------|--------------|")
-    print("| SQLite     | rusqlite    | sqlite3 (内置)    | luasql-sqlite|")
-    print("| ORM        | Diesel/SQLx | SQLAlchemy       | 自定义       |")
-    print("| Redis      | redis-rs    | redis-py         | redis-lua    |")
+    print("| 特性       | Rust        | Python           | Lua          | Go             | C++              |")
+    print("|------------|-------------|------------------|--------------|----------------|------------------|")
+    print("| SQLite     | rusqlite    | sqlite3 (内置)    | luasql-sqlite| go-sqlite3     | sqlite3          |")
+    print("| ORM        | Diesel/SQLx | SQLAlchemy       | 自定义       | GORM           | ODBC/libpq       |")
+    print("| Redis      | redis-rs    | redis-py         | redis-lua    | go-redis       | hiredis          |")
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 用 luasql 创建表、插入数据、查询数据
--- 2. 实现一个简单的事务包装函数
--- 3. 实现一个 Redis 连接池
+-- 1. 用 luasql 创建 users 表，插入 3 条数据，用 SELECT 查询并打印结果
+-- 2. 实现一个事务包装函数 with_transaction(conn, fn)，自动处理 BEGIN/COMMIT/ROLLBACK
+-- 3. 实现一个 Redis 连接池，支持 acquire 和 release，并限制最大连接数为 10
+-- 4. 实现一个 SQL 转义函数 quote_value，根据类型正确转义字符串数字和 nil
+-- 5. 用luasql 实现一个简单的 ORM 模型类：Model:new(table_name)，支持 find(id) 和 all()
 
 -- ============================================================
 -- 总结

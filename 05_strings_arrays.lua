@@ -315,39 +315,55 @@ end
 string_number_conversion()
 
 -- ============================================================
--- 【对比】Rust vs Lua vs Python
+-- 【对比】Lua vs Python vs Rust vs Go vs C++
 -- ============================================================
--- Rust:
---   - String（堆，可变）和 &str（切片引用）分离
---   - Vec<T> 是动态数组，数组是固定长度 [T; N]
---   - 字符串是 UTF-8 编码，索引按字节而非字符
---   - sort 是原地排序，binary_search 需要已排序数组
-
 -- Lua:
---   - 字符串是不可变字节序列，支持模式匹配（Lua 自己的模式）
---   - table 是 Lua 的数组/映射，可以作为动态数组使用
---   - 无内置 sort，但 table.sort 可以排序数组部分
---   - string.sub 按字节索引，不是 Unicode 字符
+--   - 字符串是不可变字节序列，string.sub 按字节索引（不是 Unicode 字符）
+--   - table 是唯一复合类型，可作数组/字典/集合
 --   - 字符串拼接用 ..（性能考虑用 table.concat）
+--   - 支持 Lua 自己的模式匹配（类似正则但简化版）
+--   - table.sort 原地排序，table.insert/remove 操作数组
 
 -- Python:
---   - str 是 Unicode 不可变字符串
+--   - str 是 Unicode 不可变字符串，索引按字符
 --   - list 是动态数组，支持增删改查
 --   - sorted() 返回新数组，list.sort() 原地排序
 --   - bisect 模块提供二分查找
---   - re 模块提供正则表达式
+--   - re 模块提供完整正则表达式
+--   - 切片语法 [start:stop:step] 强大
+
+-- Rust:
+--   - String（堆，可变）和 &str（切片引用）分离
+--   - Vec<T> 是动态数组，[T; N] 是固定长度数组
+--   - 字符串是 UTF-8 编码，索引按字节而非字符
+--   - sort 是原地排序，binary_search 需要已排序数组
+--   - 迭代器链式操作（.map().filter().collect()）
+
+-- Go:
+--   - string 是不可变 UTF-8 字节序列，rune 处理 Unicode
+--   - slice 是动态数组（引用类型），array 是值类型固定长度
+--   - 字符串拼接用 + 或 strings.Builder
+--   - regexp 提供正则表达式
+--   - sort 包提供排序和二分查找
+
+-- C++:
+--   - std::string 可变字符串（字节序列）
+--   - std::vector<T> 是动态数组
+--   - 切片需要用迭代器区间 [begin, end)
+--   - std::sort 原地排序，std::binary_search 需要已排序
+--   - 正则用 <regex>（C++11）
 
 function compare_string_array()
-    print("=== 三语言字符串数组对比 ===")
+    print("=== 五语言字符串数组对比 ===")
 
     -- Lua 字符串索引陷阱
     local s = "你好"
-    print("Lua: '你好' len=# =", #s, ", 字节数")
+    print("Lua: '你好' len=# =", #s, ", 字节数（UTF-8 每个汉字 3 字节）")
     print("Lua: string.len =", string.len(s))
 
-    -- Rust: len=6, chars=2
-    -- Python: len('你好') = 2
-    -- Lua: #"你好" = 6（字节数）
+    -- Rust: len=6 字节, chars().count()=2 字符
+    -- Python: len('你好') = 2 字符
+    -- Lua: #"你好" = 6（字节数，不是字符数！）
 
     -- Lua 的 table 既是数组又是字典
     local arr = {1, 2, 3}
@@ -357,12 +373,13 @@ function compare_string_array()
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 实现一个函数，统计字符串中单词数量（空格分隔）
--- 2. 实现字符串反转函数（处理多字节字符）
--- 3. 用 Lua 实现一个二维矩阵乘法
--- 4. 实现冒泡排序
+-- 1. 实现一个函数，统计字符串中单词数量（空格分隔，中文按标点分词）
+-- 2. 实现字符串反转函数（不能使用 string.reverse），并验证和原生 reverse 结果一致
+-- 3. 用 Lua 实现一个二维矩阵乘法（3x3 矩阵乘以 3x3 矩阵）
+-- 4. 实现冒泡排序，并比较它和快速排序的性能差异
+-- 5. 用 Lua 模式匹配实现一个简单的 URL 解析器，提取协议、主机和路径
 
 -- ============================================================
 -- 总结

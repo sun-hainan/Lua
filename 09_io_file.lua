@@ -308,19 +308,23 @@ buffered_io_demo()
 --   - pathlib 提供面向对象路径处理
 
 function compare_io()
-    print("=== 三语言IO对比 ===")
+    print("=== 五语言IO对比 ===")
 
-    -- 文件读取模式对比
     -- Lua:  local f = io.open("file.txt", "r") local content = f:read("*a") f:close()
     -- Python: with open("file.txt", "r") as f: content = f.read()
+    -- Rust: std::fs::read_to_string() 或 BufReader
+    -- Go: os.ReadFile() 或 bufio.Scanner
+    -- C++: std::ifstream + std::stringstream
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 实现一个文件复制函数
--- 2. 实现一个配置解析器（支持键=值格式）
--- 3. 比较行缓冲和全缓冲的区别
+-- 1. 实现一个文件复制函数 copy_file(src, dst)，使用二进制模式
+-- 2. 实现一个配置解析器（支持 key=value 和 key="value" 格式），返回 table
+-- 3. 比较行缓冲和全缓冲的区别，说明各自的适用场景
+-- 4. 实现一个 CSV 解析函数：parse_csv("a,b,c\n1,2,3") 返回 {{"a","b","c"},{"1","2","3"}}
+-- 5. 用 table 序列化实现一个简单的数据存储：save_data 和 load_data 函数
 
 -- ============================================================
 -- 总结

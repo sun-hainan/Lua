@@ -593,9 +593,15 @@ complexity_analysis()
 --   - heapq 提供堆操作
 
 function compare_dsa()
-    print("=== 三语言数据结构对比 ===")
+    print("=== 五语言数据结构对比 ===")
 
-    -- Lua 的 table 是万能的
+    -- Lua: table 是唯一复合类型，可作数组/字典/集合/链表/树
+    -- Python: list/dict/set/tuple/frozenset 是内建
+    -- Rust: Vec/HashMap/HashSet/BTreeMap/linked_list 需手写或用库
+    -- Go: slice/map，没有 set/linked_list 标准库
+    -- C++: std::vector/std::unordered_map/std::unordered_set
+    -- Note: Lua 手写数据结构是学习好方式（无泛型约束）
+
     local as_array = {1, 2, 3}      -- 数组
     local as_dict = {a = 1, b = 2}  -- 字典
     local as_set = {apple = true, banana = true}  -- 集合
@@ -604,11 +610,13 @@ function compare_dsa()
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 实现一个双向链表，支持在任意位置插入/删除
--- 2. 实现一个 BST，支持插入、删除、查找
--- 3. 用 BFS 实现无权图的最短路径
+-- 1. 实现一个双向链表，支持在任意位置插入/删除，并实现链表长度计算
+-- 2. 实现一个 BST，支持插入、删除、查找，并实现中序遍历（升序输出）
+-- 3. 用 BFS 实现无权图的最短路径（从一个节点到另一个节点的最少边数）
+-- 4. 实现归并排序（merge sort），比较它和快速排序在不同数据分布下的性能
+-- 5. 用 Lua 实现一个最小堆（MinHeap），支持 insert、extract_min、peek 操作
 
 -- ============================================================
 -- 总结

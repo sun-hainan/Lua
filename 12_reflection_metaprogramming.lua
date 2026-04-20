@@ -354,23 +354,26 @@ environment_demo()
 --   - exec/eval 动态执行代码
 
 function compare_metaprogramming()
-    print("=== 三语言元编程对比 ===")
+    print("=== 五语言元编程对比 ===")
 
-    -- Lua 的元编程能力最强（动态语言本质）
-    -- Python 通过装饰器提供编译时代码生成
-    -- Rust 通过宏提供编译时代码生成
+    -- Lua: 最强反射能力（动态语言本质），loadstring 可执行任意代码
+    -- Python: 装饰器 + eval/exec + metaclasses
+    -- Rust: 强大宏系统（编译时代码生成），proc_macro
+    -- Go: 有限反射（reflect 包），无宏
+    -- C++: 模板元编程（TMP），编译时计算
 
-    -- Lua 的 loadstring 可以执行任意代码
-    -- Python 的 eval/exec 类似
-    -- Rust 没有这种能力（需要外部库）
+    print("Lua: loadstring + metatable = most dynamic")
+    print("Rust: macro_rules! = most powerful compile-time")
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 实现一个安全版本的 eval（限制数学运算）
--- 2. 用元表实现一个只读表（read-only table）
--- 3. 用闭包实现记忆化斐波那契
+-- 1. 实现一个安全版本的 eval（限制只能执行数学运算：+ - * / ^），禁止访问全局变量
+-- 2. 用元表实现一个只读表（read-only table），任何修改操作都会抛出错误
+-- 3. 用闭包实现记忆化斐波那契，比较普通递归和记忆化递归的性能
+-- 4. 用 metatable 的 __index 实现一个代理对象，每次访问属性时打印日志
+-- 5. 实现一个简单的类系统：Class(name, fields)，返回一个可以用 : 调用方法的类
 
 -- ============================================================
 -- 总结

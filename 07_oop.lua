@@ -361,28 +361,25 @@ metamethods_demo()
 --   - 可见性靠约定（_protected / __private）
 
 function compare_oop()
-    print("=== 三语言OOP对比 ===")
+    print("=== 五语言OOP对比 ===")
 
-    -- Lua 的"类"
-    local function create_class()
-        local obj = {}
-        setmetatable(obj, {__index = obj})
-        return obj
-    end
-
-    -- Lua 的继承通过 metatable 实现
-    -- Python 有 class 关键字
-    -- Rust 用 impl 和 trait
+    -- Lua: table + metatable，__index 实现继承链
+    -- Python: class 关键字，单继承 + 多继承
+    -- Rust: struct + impl，无继承，用 trait 代替
+    -- Go: struct + 方法，无类/继承，用组合代替
+    -- C++: class 关键字，多继承，运算符重载
 
     print("Lua uses table + metatable for OOP")
 end
 
 -- ============================================================
--- 练习题
+-- 【练习题】
 -- ============================================================
--- 1. 用 metatable 实现一个栈类（push/pop/peek/isEmpty）
--- 2. 实现一个带继承的 Shape 层次结构
--- 3. 用元方法实现复数运算
+-- 1. 用 metatable 实现一个栈类（push/pop/peek/isEmpty），返回栈顶元素但不弹出
+-- 2. 实现一个带继承的 Shape 层次结构（Shape -> Circle + Rectangle），各自实现 area()
+-- 3. 用元方法实现复数运算（Complex 类型，支持 +、-、*、==、tostring）
+-- 4. 实现一个带私有变量的银行账户类（balance 是私有的，提供 deposit/withdraw/get_balance）
+-- 5. 实现多重继承：A 和 B 各有一个方法，C 同时继承 A 和 B，实现 __index 查找链
 
 -- ============================================================
 -- 总结
